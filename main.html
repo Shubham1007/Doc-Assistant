@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+    <link rel="stylesheet" href="ts.css">
+    <script src="jq.js"></script>
+    <script src="jq1.js"></script>
+	
+    <link rel="stylesheet" href="style.css">
+
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="angular.min.js"></script>
+	
+<style>
+body 
+{
+	margin:0;
+	font-family: Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+form.example button:hover {
+    background: #0b7dda;
+}
+
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+</style>
+
+
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+</style>
+  
+<style>
+body {
+    font-family: Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+}
+
+form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}
+
+form.example button:hover {
+    background: #0b7dda;
+}
+
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+</style>
+</head>
+<body>  
+
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="/doc">Join Doctor </a></li>
+  <li><a href="#">Contact</a></li>
+  <li><a href="#about">About</a></li>
+</ul>
+<br><br><br><br><br><br>
+<center><h2>Ask A Doctor Online</h2></center>
+<div>
+<script class="myapp">
+angular.module('myApp', [])
+  .controller('SearchCtrl', function($rootScope, $scope, $location) {
+
+    $scope.suggestion = {};
+
+    var haystack = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Small Talk", "Scheme"];
+
+    $scope.querySuggest = function($event) {
+      if ($event.keyCode == 39) { 
+        $scope.query = $scope.suggestion.text;
+        return;
+      }
+      $scope.suggestion.text = '';
+      for (var i = 0; i < haystack.length; i++) {
+        if ($scope.query && haystack[i].indexOf($scope.query) === 0) {
+          $scope.suggestion.text = haystack[i];
+          console.log(haystack[i]);
+          break;
+        }
+      }
+
+    }
+
+  });
+</script>
+</div>
+
+<div ng-app="" ng-init="places=['Gynecologist','Psychology','Sexologist','General Physician','Pediatrics','Cardiology','Orthopedics','Endocrinology','Ophthalmology','Nutritionist'];">
+<form class="example" action="/index" style="margin:auto;max-width:500px" method="get">
+
+  <br>
+    <input type="text"  ng-model="curPlace" class="inputText" placeholder="Search Specialist,Symptoms" name="search2">
+  <button type="submit"><i class="fa fa-submit">Send Request</i></button>
+	<br>
+            <li style="color:red;" ng-repeat="place in places | filter:curPlace">  
+                   <a style="color:blue;"  ng-href="/index">{{place}} </a>  
+
+            </li>  
+</form>
+
+	</div>
+	
+	
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+</body>
+</html> 

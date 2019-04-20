@@ -1,0 +1,153 @@
+<html>
+
+<head>
+    <!-- jQuery library -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="jq.js"></script>
+    <script src="jq1.js"></script>
+	
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+var hs,hs1,hss;
+
+        var username = "";
+        var socket =io("http://localhost:1234/");
+
+       socket.on("get user",function(data){
+        });
+
+        socket.on("rmsg",function(data){
+            if(username==data.name) {
+                var html = '<div class="col-md-8 agent">' +
+                        '<p ><strong>'+data.name+':</strong> '+data.msg+'</p>' +
+                        '</div>';
+		
+            }
+            else {
+                var html = '<div class="col-md-8 customer">' +
+                        '<p ><strong>'+data.name+':</strong> '+data.msg+'</p>' +
+						'</div>';
+						
+				
+            }
+            $("#message").append(html);
+
+        });
+
+        $(document).ready(function(){
+            $("#unamesave").click(function(){
+                   socket.emit("new user",$("#usrname").val());
+                username=$("#usrname").val();
+                   $("#usrname").val('');
+            });
+
+
+            if(username==""){
+                $("#myModal").modal();
+            };
+
+            $("#msgbox").keyup(function(e){
+               if(e.keyCode==13){
+                   socket.emit("msg",username, $("#msgbox").val());
+                   $("#msgbox").val('');
+               }
+            });
+
+        })
+		
+		
+    </script>
+<style>
+    #message{
+        max-height: 400px;
+        overflow: scroll;
+        overflow-x: hidden;
+    }
+    .customer strong{
+         color: red;
+     }
+    .agent strong{
+        color: blue;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8 col-md-offset-2 border">
+                <div class="col-md-8 col-md-offset-2 well">
+                    <h3 ><center>Online Chat With Specialist</center></h3>
+                    <div class="col-md-8">
+                    <p >Welcome to Doc Assitant</p>
+                </div>
+                    <div class="col-md-12" id="message" ><script> get();</script> </div>
+
+                    <textarea id="msgbox" style="width: 100%"></textarea>
+					<center><span>Press Enter</span></center>
+                </div>
+				
+<div>
+<br><br><br><br><br><br><br><br><br><br>
+
+<button onclick="goBack()" class="glyphicon glyphicon-off" ><b>	Go Back</b></button>
+
+<script>
+function goBack() {
+      window.history.back()=function()
+{
+    window.history.back();
+	break;
+}
+
+
+}
+</script>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><center>Doctor Details</center></h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" method="post">
+                        <div class="form-group">
+                            <label for="usrname"><span class="glyphicon glyphicon-user"></span> Doctor Name</label>
+                            <input type="text" class="form-control" id="usrname" placeholder="Enter Name" required="required" >
+		<span><b>Please click button do not hit enter </b></span> 
+                        <button type="button" id="unamesave" data-dismiss="modal" class="btn btn-default btn-success btn-block">
+                            <span class="glyphicon glyphicon-off" ></span> Save </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+	
+	<br><br>
+	
+
+	
+	
+
+</body>
+</html>
